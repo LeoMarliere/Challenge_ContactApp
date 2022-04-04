@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		231A1AEC27FB341000EA42CD /* GetAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231A1AEB27FB341000EA42CD /* GetAccountViewController.swift */; };
 		232D303027F7196D003BDA98 /* AcountInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232D302F27F7196D003BDA98 /* AcountInfoViewController.swift */; };
 		23C8CC1E27F5E152004D8380 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C8CC1D27F5E152004D8380 /* AppDelegate.swift */; };
 		23C8CC2027F5E152004D8380 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C8CC1F27F5E152004D8380 /* SceneDelegate.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		231A1AEB27FB341000EA42CD /* GetAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAccountViewController.swift; sourceTree = "<group>"; };
 		232D302F27F7196D003BDA98 /* AcountInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcountInfoViewController.swift; sourceTree = "<group>"; };
 		23C8CC1A27F5E152004D8380 /* ContactApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23C8CC1D27F5E152004D8380 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				23C8CC1D27F5E152004D8380 /* AppDelegate.swift */,
 				23C8CC1F27F5E152004D8380 /* SceneDelegate.swift */,
 				232D302F27F7196D003BDA98 /* AcountInfoViewController.swift */,
+				231A1AEB27FB341000EA42CD /* GetAccountViewController.swift */,
 				23C8CC2127F5E152004D8380 /* ViewController.swift */,
 				23C8CC2327F5E152004D8380 /* Main.storyboard */,
 				23C8CC2627F5E154004D8380 /* Assets.xcassets */,
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23C8CC2227F5E152004D8380 /* ViewController.swift in Sources */,
+				231A1AEC27FB341000EA42CD /* GetAccountViewController.swift in Sources */,
 				23C8CC1E27F5E152004D8380 /* AppDelegate.swift in Sources */,
 				232D303027F7196D003BDA98 /* AcountInfoViewController.swift in Sources */,
 				23C8CC2027F5E152004D8380 /* SceneDelegate.swift in Sources */,

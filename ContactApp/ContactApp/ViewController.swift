@@ -9,66 +9,115 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    struct Constant {
+        static let accountNameTest1 = "wombatresmgr" 
+        static let accountNameTest2 = "womplayitems"
+        static let apiURL = "https://eos.greymass.com/v1/chain/get_account"
+        static let mockAccount = AccountData(account_name: "wombatresmgr",
+                                             core_liquid_balance: "12045",
+                                             net_weight: "1234732",
+                                             cpu_weight: "23862",
+                                             ram_usage: "4362722")
+    }
+    
     @IBOutlet var accountNameEntry: UITextField!
     @IBOutlet var entryButton: UIButton!
     @IBOutlet var errorMessage: UILabel!
-    
-    private let apiURL = "http://localhost:8080/v1/chain/get_account/"
-    private let accountNameTest = "wombatresmgr"
-    // /paths/~1get_abi/post/requestBody/content/application~1json/schema/properties/account_name
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Account Name"
     }
     
+    private func getAPIData(with accountName: String) {
+
+        // Create Request
+        guard let formattedURL = URL(string: Constant.apiURL) else {
+            print("Error While creating URL")
+            return
+        }
+        
+        var request = URLRequest(url: formattedURL,
+                                 cachePolicy: .useProtocolCachePolicy,
+                                 timeoutInterval: 10)
+
+        let jsonBody = ["account_name":accountName] as [String:Any]
+
+        do {
+            let requestBody = try JSONSerialization.data(withJSONObject: jsonBody, options: .fragmentsAllowed)
+            request.httpBody = requestBody
+            request.httpMethod = "POST"
+        }
+        catch {
+            print("Failed to create Request body")
+        }
+        
+        // Execute Request
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard error == nil, data == data else {
+                print ("Error")
+                return
+            }
+            
+            do {
+                let dictionnary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [String:Any]
+                
+                guard dictionnary != nil,
+                      let core_liquid_balance = dictionnary!["core_liquid_balance"] as? String,
+                      let net_weight = dictionnary!["net_weight"] as? Int,
+                      let cpu_weight = dictionnary!["cpu_weight"] as? String,
+                      let ram_usage = dictionnary!["ram_usage"] as? Int else {
+                    print("Error with the Mapping of the Data")
+                    DispatchQueue.main.async { self.errorMessage.isHidden = false }
+                    return
+                }
+                
+                let accountData = AccountData(account_name: accountName,
+                                          core_liquid_balance: core_liquid_balance,
+                                          net_weight: String(net_weight),
+                                          cpu_weight: cpu_weight,
+                                          ram_usage: String(ram_usage))
+                
+                DispatchQueue.main.async {
+                    self.displayAccountData(with: accountData)
+                }
+                
+            } catch {
+                print("Failed to convert data")
+            }
+        }.resume()
+    }
     
-    private func getAPIData(from url: String) -> AccountData? {
+    private func displayAccountData(with data: AccountData) {
         
-        /*
-        var accountData: AccountData?
-        
-        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { data, response, error in
-            
-            guard let data = data, error == nil else { return }
-            
-            var result: Response?
-            do { result = try JSONDecoder().decode(Response.self, from: data) }
-            catch { print("Failed to convert data")}
-            
-            guard let response = result else { return }
-            accountData = response.result
-        }).resume()
-         
-         return accountData
-         */
-        
-        
-        //TEST VALUE
-        return AccountData(account_name: "wombatresmgr",
-                           core_liquid_balance: "12045",
-                           net_weight: "1234732",
-                           cpu_weight: "23862",
-                           ram_usage: "4362722")
-        
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "AccountInfoViewController") as? AccountInfoViewController else {
+            return
+        }
+
+        vc.accountData = data
+        vc.title = "Account Information"
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func didTapValidation() {
         
         errorMessage.isHidden = true
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "AccountInfoViewController") as? AccountInfoViewController else {
+        
+        guard let accountName = accountNameEntry.text, !accountName.isEmpty else {
             return
         }
         
-        guard let accountName = accountNameEntry.text, !accountName.isEmpty,
-              let accountData = getAPIData(from: apiURL + accountName) else {
-                  errorMessage.isHidden = false
-                  return
+        self.getAPIData(with: accountName)
+    }
+    
+    @IBAction func didTapV2() {
+        
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "GetAccountViewController") as? GetAccountViewController else {
+            return
         }
         
-        vc.accountData = accountData
-        vc.title = "Account Information"
+        vc.title = "Get Account Information"
         navigationController?.pushViewController(vc, animated: true)
     }
 
