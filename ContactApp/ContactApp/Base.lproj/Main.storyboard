@@ -319,6 +319,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="accountNameEntry" destination="kfR-eY-wNM" id="hgj-i9-iyj"/>
                         <outlet property="noValue" destination="5vR-sz-wqH" id="8M7-pZ-n6q"/>
                         <outlet property="valueCPU" destination="3Rq-L4-7pA" id="uZP-qz-3Pb"/>
                         <outlet property="valueEOS" destination="p2w-hR-NI0" id="etE-Rn-1Ft"/>

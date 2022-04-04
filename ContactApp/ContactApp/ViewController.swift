@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     struct Constant {
-        static let accountNameTest1 = "wombatresmgr" 
+        static let accountNameTest1 = "wombatresmgr"
         static let accountNameTest2 = "womplayitems"
         static let apiURL = "https://eos.greymass.com/v1/chain/get_account"
         static let mockAccount = AccountData(account_name: "wombatresmgr",
@@ -120,8 +120,6 @@ class ViewController: UIViewController {
         vc.title = "Get Account Information"
         navigationController?.pushViewController(vc, animated: true)
     }
-
-
 }
 
 
@@ -137,96 +135,3 @@ public struct AccountData: Codable {
     let cpu_weight: String
     let ram_usage: String
 }
-
-
-/*
- 
- {
-   "account_name": "string",
-   "head_block_num": 0,
-   "head_block_time": "string",
-   "last_code_update": "string",
-   "created": "string",
-   "refund_request": {
-     "owner": "string",
-     "request_time": "string",
-     "net_amount": "string",
-     "cpu_amount": "string"
-   },
-   "ram_quota": "string",
-   "net_limit": {
-     "max": "string",
-     "available": "string",
-     "used": "string"
-   },
-   "cpu_limit": {
-     "max": "string",
-     "available": "string",
-     "used": "string"
-   },
-   "total_resources": {
-     "owner": "string",
-     "ram_bytes": "string",
-     "net_weight": "string",
-     "cpu_weight": "string"
-   },
-   "core_liquid_balance": "string",
-   "self_delegated_bandwidth": {
-     "from": "string",
-     "to": "string",
-     "net_weight": "string",
-     "cpu_weight": "string"
-   },
-   "net_weight": "string",
-   "cpu_weight": "string",
-   "ram_usage": "string",
-   "privileged": true,
-   "permissions": [
-     {
-       "parent": "string",
-       "perm_name": "string",
-       "required_auth": {
-         "waits": [
-           {
-             "wait_sec": 0,
-             "weight": 0
-           }
-         ],
-         "keys": [
-           {
-             "key": "string",
-             "weight": 0
-           }
-         ],
-         "threshold": 0,
-         "accounts": [
-           {
-             "weight": 0,
-             "permission": {
-               "actor": "string",
-               "permission": "string"
-             }
-           }
-         ]
-       }
-     }
-   ],
-   "voter_info": {
-     "owner": "string",
-     "proxy": "string",
-     "producers": [
-       "string"
-     ],
-     "staked": "string",
-     "last_vote_weight": "string",
-     "proxied_vote_weight": "string",
-     "is_proxy": 0,
-     "flags1": 0,
-     "reserved2": 0,
-     "reserved3": "string"
-   }
- }
- 
- */
-
-
